@@ -20,7 +20,8 @@ const Hero: React.FC = () => {
     const fetchBanner = async () => {
       try {
         const res = await axios.get("http://localhost:8000/api/banners");
-        console.log("Fetched banner data:", res.data.data);
+        localStorage.setItem("bannerData", JSON.stringify(res.data.data));
+        console.log( res.data.data.length);
 
         const activeBanner = res.data.data.find(
           (b: Banner) => b.is_active === 1 || b.is_active === "1"

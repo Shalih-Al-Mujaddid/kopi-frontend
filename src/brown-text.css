@@ -1,0 +1,84 @@
+/* Custom brown text colors for the coffee shop website */
+.text-brown {
+  color: #8B4513 !important; /* Saddle brown */
+}
+
+.text-brown-light {
+  color: #B87333 !important; /* Dark goldenrod */
+}
+
+.text-brown-dark {
+  color: #654321 !important; /* Dark brown */
+}
+
+.text-amber-brown {
+  color: #A0522D !important; /* Sienna */
+}
+
+.text-coffee-brown {
+  color: #6F4E37 !important; /* Coffee brown */
+}
+
+.text-espresso {
+  color: #3B2F2F !important; /* Dark espresso */
+}
+
+/* Brown background colors */
+.bg-brown {
+  background-color: #8B4513 !important;
+}
+
+.bg-brown-light {
+  background-color: #B87333 !important;
+}
+
+.bg-brown-dark {
+  background-color: #654321 !important;
+}
+
+/* Brown border colors */
+.border-brown {
+  border-color: #8B4513 !important;
+}
+
+.border-brown-light {
+  border-color: #B87333 !important;
+}
+
+/* Hover effects with brown */
+.hover-brown:hover {
+  color: #8B4513 !important;
+}
+
+.hover-bg-brown:hover {
+  background-color: #8B4513 !important;
+}
+
+/* Specific brown styling for different sections */
+.hero-title-brown {
+  color: #B87333 !important;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.about-title-brown {
+  color: #8B4513 !important;
+  font-style: italic;
+}
+
+.menu-title-brown {
+  color: #A0522D !important;
+  font-weight: 600;
+}
+
+.product-title-brown {
+  color: #6F4E37 !important;
+}
+
+/* Brown gradient text */
+.gradient-brown {
+  background: linear-gradient(45deg, #8B4513, #B87333, #A0522D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

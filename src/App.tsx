@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -60,6 +61,33 @@ function App() {
     setCart([]);
   };
 
+  const submitOrder = async () => {
+    if (cart.length === 0) {
+      alert("Keranjang kosong. Tambahkan produk terlebih dahulu.");
+      return;
+    }
+    try {
+      const orderData = {
+        items: cart.map(item => ({
+          product_id: item.id,
+          quantity: item.quantity,
+          price: item.price
+        })),
+        total: cart.reduce((total, item) => total + item.price * item.quantity, 0)
+      };
+      const response = await axios.post("http://localhost:8000/api/orders", orderData);
+      if (response.status === 201 || response.status === 200) {
+        alert("Pesanan berhasil dikirim!");
+        clearCart();
+      } else {
+        alert("Gagal mengirim pesanan. Silakan coba lagi.");
+      }
+    } catch (error) {
+      console.error("Error submitting order:", error);
+      alert("Terjadi kesalahan saat mengirim pesanan.");
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -68,6 +96,7 @@ function App() {
         removeFromCart={removeFromCart}
         updateQuantity={updateQuantity}
         clearCart={clearCart}
+        submitOrder={submitOrder}
       />
       <Hero />
       <About />

@@ -33,11 +33,12 @@ const Gallery: React.FC = () => {
           items = res.data.data;
         }
 
-        console.log("Fetched gallery data:", items);
-        console.log(
-          "Constructed image URLs:",
-          items.map((item) => `http://localhost:8000/storage/${item.image}`)
-        );
+        localStorage.setItem("galleryData", JSON.stringify(items));
+        const urls = items.map((item) => `http://localhost:8000/storage/${item.image}`);
+        localStorage.setItem("galleryUrls", JSON.stringify(urls));
+        console.log();
+        setGalleries(items);
+
 
         setGalleries(items);
       } catch (err) {

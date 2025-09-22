@@ -13,6 +13,7 @@ interface NavbarProps {
   removeFromCart?: (id: number) => void;
   updateQuantity?: (id: number, quantity: number) => void;
   clearCart?: () => void;
+  submitOrder?: () => Promise<void>;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -20,7 +21,8 @@ const Navbar: React.FC<NavbarProps> = ({
   cart = [],
   removeFromCart,
   updateQuantity,
-  clearCart
+  clearCart,
+  submitOrder
 }) => {
   const [isNavActive, setNavActive] = useState(false);
   const [isSearchActive, setSearchActive] = useState(false);
@@ -258,7 +260,9 @@ const Navbar: React.FC<NavbarProps> = ({
               </button>
               <button
                 onClick={() => {
-                  alert("Pesan Sekarang: Pembayaran sedang diproses!");
+                  if (submitOrder) {
+                    submitOrder();
+                  }
                 }}
                 className="order-now-btn bg-green-500 text-white rounded px-4 py-2 hover:bg-green-600 flex-1 font-semibold"
               >

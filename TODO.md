@@ -1,16 +1,15 @@
-# TODO: Coffee Shop Website Features
+# TODO: Implement Order Submission to Database
 
-## Product Section
-- [x] Make eye icon always visible (remove hover-only opacity)
-- [x] Increase eye icon button size for better touch accessibility
-- [x] Adjust image styles for better responsiveness using Tailwind classes
-- [x] Test responsiveness on different screen sizes
+## Current Status
+- Cart functionality exists in frontend
+- "Pesan Sekarang" button now submits orders to backend
+- Backend integration added for orders
+- Backend order system already implemented by user
 
-## Cart Functionality
-- [x] Add cart state management in App.tsx
-- [x] Implement addToCart function with quantity handling
-- [x] Connect cart button in product modal to addToCart
-- [x] Add success alert when item is added to cart
-- [x] Close modal after adding to cart
-- [x] Create cart display component (optional)
-- [x] Add cart count indicator in navbar (optional)
+## Tasks
+- [x] Add order submission function in App.tsx to send cart data to backend API
+- [x] Pass order function as prop to Navbar component
+- [x] Update "Pesan Sekarang" button in Navbar.tsx to call order function
+- [x] Handle success/error responses and clear cart on success
+- [x] Test order submission flow (code review completed)
+- [x] Backend order system implemented (confirmed by user)
