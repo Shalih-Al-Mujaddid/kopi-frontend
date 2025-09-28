@@ -10,6 +10,7 @@ interface Banner {
   image_url?: string | null;
   link?: string | null;
   is_active: number | string;
+  text_color?: string | null;
 }
 
 const Hero: React.FC = () => {
@@ -74,12 +75,13 @@ const Hero: React.FC = () => {
       {/* Konten */}
       <main className="relative z-10 px-4">
       <div className="text-center">
-        <h1>
-        <span className="text-white">{banner.title}</span>{""}
-        <span className="text-orange-900">{banner.title_secondary}</span>
+        <h1 className="text-3xl md:text-5xl font-bold">
+          <span className="text-white">{banner.title}</span>
+          <span style={{ color: banner.text_color || "#ffffff"}}>
+            {banner.title_secondary}
+          </span>
         </h1>
       </div>
-
 
         {banner.subtitle && (
           <h2>
@@ -95,7 +97,7 @@ const Hero: React.FC = () => {
             href={banner.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-block text-sm font-sans text-white hover:underline"
+            className="mt-4 inline-block text-sm font-sans text-white hover:underline text-bold"
           >
             Lihat Selengkapnya
           </a>

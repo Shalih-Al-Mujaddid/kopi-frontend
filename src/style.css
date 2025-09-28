@@ -233,11 +233,12 @@ body {
   width: 70%;
 }
 
-.clear-cart-btn,
+/* .clear-cart-btn,
 .order-now-btn {
-  margin: 0 !important;
-  display: flex !important;
-}
+  display: flex;
+  margin-top: 0; 
+} */
+
 
 
 .form-container .checkout-button {

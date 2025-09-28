@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { ShoppingCart, Menu, Search, X } from "react-feather";
+declare global {
+  interface Window {
+    snap: any;
+  }
+}
+
 
 interface NavbarProps {
   onSearch: (query: string) => void;
@@ -246,7 +252,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <div className="cart-total mt-4 font-semibold border-t border-gray-300 pt-2">
                 <p>Total: Rp {cart.reduce((total, item) => total + item.price * item.quantity, 0).toLocaleString()}</p>
               </div>
-            <div className="flex mt-4 gap-4">
+            <div className="mt-4 grid grid-cols-2 gap-4">
               <button
                 onClick={() => {
                   if (clearCart) {
@@ -254,26 +260,65 @@ const Navbar: React.FC<NavbarProps> = ({
                     alert("Keranjang telah dikosongkan!");
                   }
                 }}
-                className="clear-cart-btn bg-red-500 text-white rounded px-4 py-2 hover:bg-red-600 flex-1 font-semibold"
+                className="bg-red-500 text-white rounded px-4 py-2 hover:bg-red-600 font-semibold"
               >
                 Kosongkan Keranjang
               </button>
               <button
-                onClick={() => {
-                  if (submitOrder) {
-                    submitOrder();
+                onClick={async () => {
+                  try {
+                    const res = await fetch("http://localhost:8000/api/orders", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        items: cart.map((item) => ({
+                          product_id: item.id,  // ✅ backend butuh product_id
+                          quantity: item.quantity,
+                          price: item.price,
+                        })),
+                        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // ✅ wajib
+                      }),
+                    });
+
+                    const data = await res.json();
+                    console.log(data);
+
+                    if (window.snap) {
+                      window.snap.pay(data.snap_token, {
+                        onSuccess: function (result: any) {
+                          console.log("✅ Success:", result);
+                          clearCart?.();
+                        },
+                        onPending: function (result: any) {
+                          console.log("⏳ Pending:", result);
+                        },
+                        onError: function (result: any) {
+                          console.error("❌ Error:", result);
+                        },
+                        onClose: function () {
+                          alert("Kamu belum membayarnya apakah kamu ingin menutupnya?");
+                        },
+                      });
+                    } else {
+                      alert("Midtrans Snap sedang dimuat!");
+                    }
+
+                  } catch (error) {
+                    console.error("Checkout error:", error);
                   }
                 }}
-                className="order-now-btn bg-green-500 text-white rounded px-4 py-2 hover:bg-green-600 flex-1 font-semibold"
+                className="bg-green-500 text-white rounded px-4 py-2 hover:bg-green-600 font-semibold"
               >
                 Pesan Sekarang
               </button>
+
+
             </div>
             </>
           )}
         </div>
       </nav>
-g
+
       {/* MODAL */}
       <div
         id="item-detail-modal"
